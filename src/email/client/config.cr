@@ -16,14 +16,14 @@ class EMail::Client
 
   # SMTP client setting object.
   #
-  # ```crystal
+  # ```
   # # Create config object with the SMTP server FQDN(or IP address), port number, and helo domain.
   # config = EMail::Client::Config.new("your.mx.example.com", 587, helo_domain: "your.host.example.com")
   # ```
   #
   # ### TLS settings
   #
-  # ```crystal
+  # ```
   # # Use SMTP over SSL/TLS
   # config.use_tls(TLSMode::SMTPS)
   #
@@ -42,20 +42,20 @@ class EMail::Client
   #
   # ### SMTP authentication
   #
-  # ```crystal
+  # ```
   # config.use_auth("id", "password")
   # ```
   #
   # ### Logging
   #
-  # ```crystal
+  # ```
   # # Use the client specific(non-default) logger.
   # config.log = Log.for("your_log_source")
   # ```
   #
   # ### Error handling
   #
-  # ```crystal
+  # ```
   # # Set SMTP error handler.
   # # Default: nil
   # config.on_failed = EMail::Client::OnFailedProc.new do |mail, command_history|
@@ -73,7 +73,7 @@ class EMail::Client
   #
   # ### Connection timeouts
   #
-  # ```crystal
+  # ```
   # config.connect_timeout = 1 # sec
   # config.read_timeout = 1    # sec
   # config.write_timeout = 1   # sec
@@ -82,7 +82,7 @@ class EMail::Client
   #
   # ### Misc
   #
-  # ```crystal
+  # ```
   # # Set email client name, used in log entries and Message-ID headers.
   # # Default: "EMail_Client"
   # config.name = "your_app_name"
@@ -144,8 +144,8 @@ class EMail::Client
     # - `auth: {"id", "password"}` -> `#use_auth("id", "password")`
     #
     # Other optional arguments set value to the property that has the same name.
-    def self.create(host, port = EMail::DEFAULT_SMTP_PORT, *, 
-                    helo_domain : String, client_name : String? = nil, 
+    def self.create(host, port = EMail::DEFAULT_SMTP_PORT, *,
+                    helo_domain : String, client_name : String? = nil,
                     on_failed : EMail::Client::OnFailedProc? = nil,
                     on_fatal_error : EMail::Client::OnFatalErrorProc? = nil,
                     tls_verify_mode : OpenSSL::SSL::VerifyMode? = nil,

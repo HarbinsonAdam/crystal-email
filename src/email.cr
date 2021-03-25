@@ -15,7 +15,7 @@ module EMail
 
   # Send one email with given client settings as EMail::Client::Config object.
   #
-  # ```crystal
+  # ```
   # config = EMail::Client::Config.new("your.mx.server.name", 587, helo_domain: "your.helo.domain")
   # config.use_tls(:starttls)
   # config.use_auth("your_id", "your_password")
@@ -45,9 +45,9 @@ module EMail
   # Send one email with given client settings as several arguments.
   #
   # Avairable arguments are same as `EMail::Client::Conifg.create` method.
-  # ```crystal
+  # ```
   # EMail.send("your.mx.server.name", 578, helo_domain: "your.helo.domain",
-  #            use_tle: :starttls, auth: {"your_id", "your_password"}) do
+  #   use_tle: :starttls, auth: {"your_id", "your_password"}) do
   #   # In this block, default receiver is EMail::Message object
   #   from "your@mail.addr"
   #   to "to@some.domain"
