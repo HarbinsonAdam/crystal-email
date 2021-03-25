@@ -68,7 +68,6 @@ class EMail::Client
     log
   end
 
-  @helo_domain : String?
   @started : Bool = false
   @first_send : Bool = true
   @tcp_socket : TCPSocket? = nil
@@ -87,10 +86,6 @@ class EMail::Client
 
   # Creates smtp client object by EMail::Client::Config object.
   def initialize(@config : EMail::Client::Config, @number = nil)
-  end
-
-  private def helo_domain : String
-    @helo_domain ||= @config.helo_domain || "[#{@tcp_socket.as(TCPSocket).local_address.address}]"
   end
 
   private def socket
@@ -166,7 +161,7 @@ class EMail::Client
     mail.date timestamp
     mail.message_id String.build { |io|
       io << '<' << timestamp.to_unix_ms << '.' << Process.pid
-      io << '.' << @config.client_name << '@' << helo_domain << '>'
+      io << '.' << @config.client_name << '@' << @config.helo_domain << '>'
     }
     mail.validate!
   end
@@ -238,7 +233,7 @@ class EMail::Client
   end
 
   private def smtp_helo
-    status_code, status_messages = smtp_command("EHLO", helo_domain)
+    status_code, status_messages = smtp_command("EHLO", @config.helo_domain)
     if status_code == "250"
       status_messages.each do |status_message|
         message_parts = status_message.strip.split(' ')
@@ -247,7 +242,7 @@ class EMail::Client
       end
       true
     elsif status_code == "502"
-      status_code, _ = smtp_command("HELO", helo_domain)
+      status_code, _ = smtp_command("HELO", @config.helo_domain)
       status_code == "250"
     end
   end

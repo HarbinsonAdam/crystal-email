@@ -7,7 +7,7 @@ require "uri"
 require "./email/*"
 
 module EMail
-  VERSION           = "0.6.2"
+  VERSION           = "0.7.0"
   DEFAULT_SMTP_PORT = 25
 
   # :nodoc:
@@ -16,8 +16,8 @@ module EMail
   # Send one email with given client settings as EMail::Client::Config object.
   #
   # ```crystal
-  # config = EMail::Client::Config.new("your.mx.server.name", 587)
-  # config.use_tls
+  # config = EMail::Client::Config.new("your.mx.server.name", 587, helo_domain: "your.helo.domain")
+  # config.use_tls(:starttls)
   # config.use_auth("your_id", "your_password")
   #
   # EMail.send(config) do
@@ -46,9 +46,8 @@ module EMail
   #
   # Avairable arguments are same as `EMail::Client::Conifg.create` method.
   # ```crystal
-  # EMail.send("your.mx.server.name", 578,
-  #   use_tle: true,
-  #   auth: {"your_id", "your_password"}) do
+  # EMail.send("your.mx.server.name", 578, helo_domain: "your.helo.domain",
+  #            use_tle: :starttls, auth: {"your_id", "your_password"}) do
   #   # In this block, default receiver is EMail::Message object
   #   from "your@mail.addr"
   #   to "to@some.domain"

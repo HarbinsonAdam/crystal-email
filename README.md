@@ -57,7 +57,7 @@ email.message <<-EOM
   EOM
 
 # Set SMTP client configuration
-config = EMail::Client::Config.new("your.mx.example.com", 25)
+config = EMail::Client::Config.new("your.mx.example.com", 25, helo_domain: "example.com")
 
 # Create SMTP client object
 client = EMail::Client.new(config)
@@ -88,7 +88,7 @@ See [EMail::Client::Config](https://www.denchu.org/crystal-email/EMail/Client/Co
 
 You can set more email headers to `EMail::Message` object.
 
-And, you can also send emails including attachment files, HTML message, and/or resource files related message body(e.g. image file for HTML message).
+And, you can also send emails including attachment files, HTML message, and/or resource files related message body(e.g. image files for HTML message).
 
 See [EMail::Message](https://www.denchu.org/crystal-email/EMail/Message.html) for more details.
 
