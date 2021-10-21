@@ -6,4 +6,8 @@ authors:
 
 crystal: 0.32.0
 
+dependecies:
+  logger:
+    github: 84codes/logger.cr
+
 license: MIT
